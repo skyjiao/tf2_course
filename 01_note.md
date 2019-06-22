@@ -20,8 +20,12 @@ Some intuitions behind different activation functions:
 
 For dense networks (aka, MLP), more layers, more neurons would make the model to learn more details and tend to overfit on training data. And for the sake of tuning simplicity, we can keep the number of neurons equally across layers since the model learn itself to *desactivate" unused neurons at higher layers. We just need to tune the number of neurons per layer and the number of layers. 
 
+    Large neural networks almost never get stuck in local minima, and even when they do these local optima are almost as good as the global optimum. However, they can still get stuck on long plateaus for a long time.
+
 
 Learning rate is *the* most important parameter to tune for *any* type of neural networks. Any change to the network should come along with a learning rate retuning. Some thought using adam optimizer, we don't need to handle learning rate, it's wrong. adam simple optimize the relative step size, but you still need to find the optimal learning rate for your problem. 
+
+## Is your learning rate depend on number of layers? 
 
 Batch size and learning rate are quite related. If one increases batch size, then one should proportionally increase the learning rate. And François Chollet suggest to always use the largest batch size possible of your GPU when training. 
 
