@@ -27,6 +27,8 @@ Learning rate is *the* most important parameter to tune for *any* type of neural
 
 ## Is your learning rate depend on number of layers? Why does it depends on batch size? Nose increases with small batch? It seems learning rate does not depend on model complexity. 
 
+## Question: how do you find your optimum learning rate? In an efficient manner because we can't just wait till the end of each training.
+
 ### to do: write my own learning rate optimizer. Check population based tuning by deep mind.
 
 Batch size and learning rate are quite related. If one increases batch size, then one should proportionally increase the learning rate. And François Chollet suggest to always use the largest batch size possible of your GPU when training. 
@@ -92,6 +94,8 @@ It seems that the reason why batch norm works is totally different than that giv
     
 An explanation of batch norm can be found [here](http://mlexplained.com/2018/01/10/an-intuitive-explanation-of-why-batch-normalization-really-works-normalization-in-deep-learning-part-1/).
 
+## Question: how to check batch norm's gamma and beta in previous exo. I didn't see anything in the summary. 
+
 ### 3. Dropout 
 First proposed by Geoffrey Hinton. 
 
@@ -99,6 +103,7 @@ Turn off random neurons at each batch (aka iteration). It forces every neuron to
 
 Another analogy is how *resnet* works with *xgboost*. When build a residual collection, the neuron actually try to predict `f(x) - x` thus the residual, which is just like `xgboost`. 
 
+## Should we put a dropout to each layer? 
 ---
 
 ## Unsupervised pretraining
