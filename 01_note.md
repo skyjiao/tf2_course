@@ -83,9 +83,14 @@ When using it, it's important to shuffle instances after each epoch, otherwise w
 
 During training, since we send data per batch, it's easy to do batch norm, but how to do it on test set if data comes along. So we need to build the batch mean and std during training. Practically, we use exponentially moving average calculated on every batches during training and apply that on test. 
 
-It seems that the reason why batch norm works is totally different than that given by its inventer. To check about covariate shift. (#to check)
+It seems that the reason why batch norm works is totally different than that given by its inventer, aka covariate shift. 
 
-## Question: what was the reason given by its inventer and why it really works. 
+    
+    Batch normalization enables the use of higher learning rates, greatly accelerating the learning process.
+    
+    In practice, restricting the activations of each layer to be strictly 0 mean and unit variance can limit the expressive power of the network. Therefore, in practice, batch normalization allows the network to learn parameters \gamma  and \beta  that can convert the mean and variance to any value that the network desires. 
+    
+An explanation of batch norm can be found [here](http://mlexplained.com/2018/01/10/an-intuitive-explanation-of-why-batch-normalization-really-works-normalization-in-deep-learning-part-1/).
 
 ### 3. Dropout 
 First proposed by Geoffrey Hinton. 
