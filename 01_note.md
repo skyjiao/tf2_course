@@ -23,11 +23,9 @@ For dense networks (aka, MLP), more layers, more neurons would make the model to
     Large neural networks almost never get stuck in local minima, and even when they do these local optima are almost as good as the global optimum. However, they can still get stuck on long plateaus for a long time.
 
 
-Learning rate is *the* most important parameter to tune for *any* type of neural networks. Any change to the network should come along with a learning rate retuning. Some thought using adam optimizer, we don't need to handle learning rate, it's wrong. adam simple optimize the relative step size, but you still need to find the optimal learning rate for your problem. 
+Learning rate is *the* most important parameter to tune for *any* type of neural networks. Any change to the network should come along with a learning rate retuning. Some thought using adam optimizer, we don't need to handle learning rate, it's wrong. adam simple optimize the relative step size, but you still need to find the optimal learning rate for your problem. I should write a simple learning rate tuning algorithm to quickly find the optimal rate within one epoch. Technically, one simply needs to 
 
-## Is your learning rate depend on number of layers? Why does it depends on batch size? Nose increases with small batch? It seems learning rate does not depend on model complexity. 
 
-## Question: how do you find your optimum learning rate? In an efficient manner because we can't just wait till the end of each training.
 
 ### to do: write my own learning rate optimizer. Check population based tuning by deep mind.
 
