@@ -1,22 +1,40 @@
+# Crash Course Deep Learning - Session Two - Low Level Tensorflow and Convolution Neural Network
+
+- **Ellipsis** `...` is used here to indicate a placeholder for the rest of the array dimensions not specified.
+Think of it as indicating the full slice [:] for all the dimensions in the gap it is placed, so for a 3d array, a[...,0] is the same as a[:,:,0] and for 4d, a[:,:,:,0], similarly, a[0,...,0] is a[0,:,:,0] (with however many colons in the middle make up the full number of dimensions in the array).
+
+- `newaxis` is used to increase the dimension of the existing array by one more dimension. 
+    - convert a 1D array to a row or column vector. 
+    ```python
+    arr = np.arange(4) # of shape (4,)
+    row_vec = arr[np.newaxis, :] # of shape (1, 4)
+    col_vec = arr[:, np.newaxis] # of shape (4, 1)
+    ```
+    - you can use it multiple times to promote the array to higher dimensions. 
+    ```python
+    arr = np.arange(5*5).reshape(5,5) # of shape (5,5)
+    arr_5D = arr[np.newaxis, ..., np.newaxis, np.newaxis] # of shape (1, 5, 5, 1, 1)
+    ```
+- Use ```partial``` to set default values for a function, pretty handy python function.
+
 ## Low level API
 
-numpy with GPU with autodiff
+- Low Level tensorflow API is like numpy with GPU that can do autodiff.
 
-tensor is immutable
+- tensor is immutable
 
-```tf.constant``` creates a tensor
+- ```tf.constant``` creates a tensor
 
-three dots - advanced indexing, just like numpy
-### to check newaxis and three dots.
-
-tensor also has broadcasting. 
+- tensor also has broadcasting. 
 ```@``` as matrix multiplication = ```tf.matmul```
-reducesum is not perfectly determinist since the GPU calculates the sum in a sort of random
-order. 
-default float type in tf is 32 bits whereas numpy is 64. 
 
-tf is strict in types, can't add 32 bits to 64 bits. (we can force by tf.cast)
-strings are atomic in tf
+- In GPU computation with tensorflow, the sum operation uses a reduce mecanism but such operation is not perfectly determinist to gain most computation efficiency, which makes the model not reproducible. But PyTorch does have an option to choose to not use it in exchange for some loss of computation speed. 
+
+- in tensorflow, default float type is 32 bits whereas numpy is 64. 
+
+- tf is strict in types, can't do addition between 32 bits and 64 bits. But we can always force by `tf.cast`. 
+- strings are atomic in tf
+
 ```RaggedTensor``` a list of tensor of different lengths. 
 
 ```SparseTensor``` don't have csr or csc representation tho. Just that. 
@@ -25,20 +43,23 @@ strings are atomic in tf
 
 ```tf.device``` let the operation remains on specific devices, CPU or GPU. By default, everything is on GPU except ```tf.data``` operations. 
 
-for information
-tf.feature_column and tf.estimator will probably die.
+- tf.feature_column and tf.estimator will probably die.
 
 ```tf.summary``` API is for building tensorboard.
 
 ```tf.lite``` is for compressing. merge operations that are not necessary. 
+
 ```tf.graph_util``` converts into computational graph. 
+
 ```tf.saved_model``` includes everything includes the training operations. 
+
 ```tf.xla``` some operation optimization on graph. some boost on sequence of small operations for ex. 
 
-tf.sets allows to do union, intersect etc.
-tf.nest nest of structure that contains tensors. 
+```tf.sets``` allows to do union, intersect etc.
 
-Most of time, when we code low level API, it's for custom cost function, metric etc. 
+```tf.nest``` nest of structure that contains tensors. 
+
+- Most of time, when we code low level API, it's for custom cost function, metric etc. 
 
 in general , we can simply passes losses per instance, and keras will take care to compute the mean or to assign proper weight to each instance;
 
@@ -138,4 +159,4 @@ Novelty detection/Anomaly detection
 One-class-SVM, IsolationForest
 https://scikit-learn.org/stable/modules/outlier_detection.html
 
-partial allows to set default values for a function, pretty handy python function.
+
